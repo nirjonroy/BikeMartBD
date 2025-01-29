@@ -34,6 +34,7 @@
             </p>
           </a>
         </li>
+
         <li class="nav-item has-treeview">
           <a href="{{route('slider.index')}}" class="nav-link">
             <i class="nav-icon fas fa-school"></i>
@@ -52,7 +53,7 @@
               </a>
             </li>
             <li class="nav-item">
-              <a href="" class="nav-link">
+              <a href="{{route('slider.create')}}" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
                 <p>Create</p>
               </a>
@@ -61,7 +62,32 @@
           </ul>
         </li>
 
+        <li class="nav-item has-treeview">
+          <a href="{{route('blog.index')}}" class="nav-link">
+            <i class="nav-icon fas fa-school"></i>
+            {{-- <i class="fa-solid fa-person-chalkboard"></i> --}}
+            <p>
+              blog
+              <i class="fas fa-angle-left right"></i>
+              {{-- <span class="badge badge-info right">6</span> --}}
+            </p>
+          </a>
+          <ul class="nav nav-treeview">
+            <li class="nav-item">
+              <a href="{{route('blog.index')}}" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Blog</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="{{route('blog.create')}}" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Create</p>
+              </a>
+            </li>
 
+          </ul>
+        </li>
 
         <li class="nav-item">
           <a href="" class="nav-link">
