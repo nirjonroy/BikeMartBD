@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\BlogController;
+use App\Http\Controllers\BrandController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
@@ -34,6 +35,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::resource('site-information', SiteInformationController::class);
     Route::resource('slider', SliderController::class);
     Route::resource('blog', BlogController::class);
+    Route::resource('brand', BrandController::class);
 
 });
 

@@ -6,11 +6,11 @@
     <div class="col-md-12">
         <div class="card card-primary">
             <div class="card-header">
-              <h3 class="card-title">Add Blog</h3>
+              <h3 class="card-title">Add Brand</h3>
             </div>
             <!-- /.card-header -->
             <!-- form start -->
-            <form role="form" action="{{ route('blog.store') }}" method="POST" enctype="multipart/form-data">
+            <form role="form" action="{{ route('brand.store') }}" method="POST" enctype="multipart/form-data">
     @csrf
     <div class="card-body">
 
@@ -28,8 +28,8 @@
         </div>
 
         <div class="form-group">
-            <label for="exampleInputName">Title</label>
-            <input type="text" class="form-control" id="title" placeholder="Add title of blog" name="title" onkeyup="generateSlug()">
+            <label for="exampleInputName">name</label>
+            <input type="text" class="form-control" id="title" placeholder="Add title of brand" name="name" onkeyup="generateSlug()">
         </div>
 
         <div class="form-group">
@@ -37,28 +37,14 @@
             <input type="text" class="form-control" id="slug" placeholder="Slug will be generated automatically" name="slug" readonly>
         </div>
 
-        <div class="form-group">
-            <label for="exampleInputName">Descriptions</label>
-            <div class="mb-3">
-                <textarea class="textarea" placeholder="Place some text here"
-                          style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;" 
-                          name="description"></textarea>
-            </div>
-        </div>
+        
 
         <div class="form-group">
-            <label for="exampleInputName">SEO Title</label>
-            <input type="text" class="form-control" id="seo_title" placeholder="Add title of blog" name="seo_title" >
+            <label for="exampleInputName">Priority</label>
+            <input type="number" class="form-control" id="seo_title" placeholder="Add priority " name="priority" >
         </div>
 
-        <div class="form-group">
-            <label for="exampleInputName">SEO Descriptions</label>
-            <div class="mb-3">
-                <textarea class="textarea" placeholder="Place some text here"
-                          style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;" 
-                          name="seo_description"></textarea>
-            </div>
-        </div>
+        
 
     </div>
     <!-- /.card-body -->

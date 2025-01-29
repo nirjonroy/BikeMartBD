@@ -62,6 +62,35 @@
           </ul>
         </li>
 
+
+        <li class="nav-item has-treeview">
+          <a href="{{route('brand.index')}}" class="nav-link">
+            <i class="nav-icon fas fa-school"></i>
+            {{-- <i class="fa-solid fa-person-chalkboard"></i> --}}
+            <p>
+              Brands
+              <i class="fas fa-angle-left right"></i>
+              {{-- <span class="badge badge-info right">6</span> --}}
+            </p>
+          </a>
+          <ul class="nav nav-treeview">
+            <li class="nav-item">
+              <a href="{{route('brand.index')}}" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Brand</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="{{route('brand.create')}}" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Create</p>
+              </a>
+            </li>
+
+          </ul>
+        </li>
+
+
         <li class="nav-item has-treeview">
           <a href="{{route('blog.index')}}" class="nav-link">
             <i class="nav-icon fas fa-school"></i>
