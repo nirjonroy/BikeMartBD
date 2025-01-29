@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\SiteInformationController;
+use App\Http\Controllers\SliderController;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,6 +31,8 @@ Route::middleware('auth:sanctum')->group(function () {
     })->name('dashboard');
 
     Route::resource('site-information', SiteInformationController::class);
+    Route::resource('slider', SliderController::class);
+
 });
 
 
