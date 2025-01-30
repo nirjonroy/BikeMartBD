@@ -109,9 +109,9 @@
               </a>
             </li>
             <li class="nav-item">
-              <a href="{{route('brand.create')}}" class="nav-link">
+              <a href="{{route('sub-category.index')}}" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
-                <p>Create</p>
+                <p>Sub Category</p>
               </a>
             </li>
 

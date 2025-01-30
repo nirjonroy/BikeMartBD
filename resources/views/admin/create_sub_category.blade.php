@@ -6,11 +6,11 @@
     <div class="col-md-12">
         <div class="card card-primary">
             <div class="card-header">
-              <h3 class="card-title">Add Category</h3>
+              <h3 class="card-title">Add Sub Category</h3>
             </div>
             <!-- /.card-header -->
             <!-- form start -->
-            <form role="form" action="{{ route('category.store') }}" method="POST" enctype="multipart/form-data">
+            <form role="form" action="{{ route('sub-category.store') }}" method="POST" enctype="multipart/form-data">
     @csrf
     <div class="card-body">
 
@@ -26,10 +26,19 @@
                 </div>
             </div>
         </div>
+        <div class="form-group ">
+            <label>Category <span class="text-danger">*</span></label>
+            <select name="cat_id" id="category" class="form-control">
+                <option value="">Select Category</option>
+                @foreach ($categories as $category)
+                    <option value="{{ $category->id }}">{{ $category->name }}</option>
+                @endforeach
+            </select>
+        </div>
 
         <div class="form-group">
             <label for="exampleInputName">name</label>
-            <input type="text" class="form-control" id="title" placeholder="Add title of category" name="name" onkeyup="generateSlug()">
+            <input type="text" class="form-control" id="title" placeholder="Add title of sub Category" name="name" onkeyup="generateSlug()">
         </div>
 
         <div class="form-group">
