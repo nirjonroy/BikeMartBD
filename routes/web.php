@@ -3,6 +3,7 @@
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\ChildCategoryController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SubCategoryController;
 use Illuminate\Support\Facades\Route;
@@ -40,6 +41,10 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::resource('brand', BrandController::class);
     Route::resource('category', CategoryController::class);
     Route::resource('sub-category', SubCategoryController::class);
+    Route::resource('child-category', ChildCategoryController::class);
+
+    Route::get('subcategory-by-category/{id}', [ChildCategoryController::class, 'getSubcategoryByCategory'])->name('subcategory-by-category');
+
     
 
 });

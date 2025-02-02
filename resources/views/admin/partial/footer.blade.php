@@ -16,6 +16,7 @@
 <!-- ./wrapper -->
 
 <!-- jQuery -->
+
 <script src="{{asset('backend/plugins/jquery/jquery.min.js')}}"></script>
 <!-- jQuery UI 1.11.4 -->
 <script src="{{asset('backend/plugins/jquery-ui/jquery-ui.min.js')}}"></script>
