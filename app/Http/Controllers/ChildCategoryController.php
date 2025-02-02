@@ -127,7 +127,7 @@ private function updateImage($file, $previousImagePath, $fieldName)
     {
         $extension = $file->getClientOriginalExtension();
         $filename = $fieldName . date('-Y-m-d-h-i-s-') . rand(999, 9999) . '.' . $extension;
-        $path = 'uploads/custom-images/sub_categories/' . $filename;
+        $path = 'uploads/custom-images/child_categories/' . $filename;
         Image::make($file)->save(public_path($path));
         return $path;
     }
@@ -170,7 +170,7 @@ private function updateImage($file, $previousImagePath, $fieldName)
 
     public function getChildcategoryBySubCategory($id){
         $childCategories=ChildCategory::where('sub_category_id',$id)->get();
-        $response='<option value="">'.trans('admin_validation.Select Child Category').'</option>';
+        $response='<option value="">'.trans('Select Child Category').'</option>';
         foreach($childCategories as $childCategory){
             $response .= "<option value=".$childCategory->id.">".$childCategory->name."</option>";
         }
