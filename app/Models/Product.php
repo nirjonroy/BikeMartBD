@@ -22,7 +22,7 @@ class Product extends Model
         'brand_id',
         'product_code',
         'image',
-        'multi_image_id',
+        'gallery_id',
         'videoUrl',
         'stock_qty',
         'sold_qty',
@@ -34,19 +34,28 @@ class Product extends Model
         'tags',
     ];
 
-    public function category(){
+    public function category()
+    {
         return $this->belongsTo(Category::class, 'categoryId');
     }
 
-    public function subCategory(){
+    public function subCategory()
+    {
         return $this->belongsTo(SubCategory::class, 'subCategoryId');
     }
 
-    public function childCategory(){
+    public function childCategory()
+    {
         return $this->belongsTo(ChildCategory::class, 'childCategoryId');
     }
 
-    public function brand(){
+    public function brand()
+    {
         return $this->belongsTo(Brand::class);
+    }
+
+    public function gallery()
+    {
+        return $this->hasMany(Galary::class, 'product_id');
     }
 }

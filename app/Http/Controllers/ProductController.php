@@ -17,8 +17,6 @@ class ProductController extends Controller
     public function index()
     {
         $products = Product::with('category', 'subCategory', 'childCategory', 'brand')->get();
-
-        // dd($products);
         return view('admin.product', compact('products'));
     }
 
@@ -52,6 +50,28 @@ class ProductController extends Controller
 
             Image::make($request->image)->save(public_path($imagePath));
             $product->image = $imagePath;
+        }
+
+        if ($request->hasFile('galary_id')) {
+            $imageData = [];
+            foreach ($request->file('galary_id') as $key => $image) {
+        
+                $extention = $image->getClientOriginalExtension();
+                $image_name = Str::slug($request->name).date('-Y-m-d-h-i-s-').rand(999,9999).'.'.$extention;
+                $image = Image::make($image);
+        
+                $destation_path_another = 'uploads/custom-images/products/'.$image_name;
+                // $image->resize(700,700);
+                $image->save(public_path().'/'.$destation_path_another);
+        
+                $imageData[] = ['image' => $destation_path_another, 'product_id' => $product->id];
+        
+            }
+        
+            if (!empty($imageData)) {
+                // Associate images with the product using the gallery relationship
+                $product->gallery()->createMany($imageData);
+            }
         }
 
         // Generate a Unique Slug
@@ -151,18 +171,12 @@ class ProductController extends Controller
     private function updateImage($file, $previousImagePath, $fieldName)
     {
         if ($file) {
-            // Delete previous image if it exists
             $this->deleteImageIfExists($previousImagePath);
-
-            // Upload new image
             return $this->uploadImage($file, $fieldName);
         }
-
-        // If no new image is uploaded, return the previous image path
         return $previousImagePath;
     }
 
-    // Helper function to upload an image
     private function uploadImage($file, $fieldName)
     {
         $extension = $file->getClientOriginalExtension();
@@ -172,7 +186,6 @@ class ProductController extends Controller
         return $path;
     }
 
-    // Helper function to delete an image if it exists
     private function deleteImageIfExists($path)
     {
         if ($path && file_exists(public_path($path))) {
@@ -183,21 +196,13 @@ class ProductController extends Controller
     public function destroy($id)
     {
         $product = Product::findOrFail($id);
-
-        // Delete associated images
-        $this->deleteImageIfExists($product->hero_banner);
-        $this->deleteImageIfExists($product->Sporting_event_image);
-
-
-        // Delete the record
+        $this->deleteImageIfExists($product->image);
         $product->delete();
-
         return redirect()->back()->with('success', 'Record deleted successfully');
     }
 
     public function getSubcategoryByCategory($id)
     {
-
         $subCategories = SubCategory::where('cat_id', $id)->get();
         $response = "<option value=''>" . trans('Select Sub Category') . "</option>";
         foreach ($subCategories as $subCategory) {
@@ -205,7 +210,6 @@ class ProductController extends Controller
         }
         return response()->json(['subCategories' => $response]);
     }
-
 
     public function getChildcategoryBySubCategory($id)
     {

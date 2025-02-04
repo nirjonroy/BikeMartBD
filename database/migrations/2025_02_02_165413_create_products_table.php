@@ -27,7 +27,7 @@ return new class extends Migration
             $table->foreignId('brand_id')->constrained('brands')->onDelete('cascade');
             $table->string('product_code')->unique();
             $table->string('image')->nullable();
-            $table->string('multi_image_id')->nullable();
+            $table->string('galary_id')->nullable();
             $table->string('videoUrl')->nullable();
             $table->integer('stock_qty')->default(0);
             $table->integer('sold_qty')->default(0);
