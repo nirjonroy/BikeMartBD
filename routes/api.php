@@ -14,7 +14,7 @@ Route::get('/user', [AuthController::class, 'user'])->middleware('auth:sanctum')
 // Secure API route with Sanctum authentication
 Route::middleware('auth:sanctum')->group(function () {
     Route::get('/site-information', [SiteInformationController::class, 'index']);   
-    Route::get('/site-information', [SiteInformationController::class, 'index']);   
+    Route::get('/slider', [SliderController::class, 'index']);   
     Route::get('/brands', [SiteInformationController::class, 'brand']);
     Route::get('/categories', [SiteInformationController::class, 'category']);
     Route::get('/subcategory', [SiteInformationController::class, 'subcategory']);
