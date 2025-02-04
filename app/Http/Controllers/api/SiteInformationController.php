@@ -3,7 +3,13 @@
 namespace App\Http\Controllers\api;
 
 use App\Http\Controllers\Controller;
+use App\Models\Blog;
+use App\Models\Brand;
+use App\Models\Category;
+use App\Models\ChildCategory;
+use App\Models\Product;
 use App\Models\siteInformation;
+use App\Models\SubCategory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 
@@ -110,4 +116,53 @@ class SiteInformationController extends Controller
             'message' => 'Site information deleted successfully',
         ], 200);
     }
+
+    public function brand(){
+        $brands = Brand::all();
+        return response()->json([
+         'success' => true,
+         'data' => $brands,
+     ], 200);
+    }
+
+    public function category(){
+        $category = Category::all();
+        return response()->json([
+         'success' => true,
+         'data' => $category,
+     ], 200);
+    }
+
+    public function subcategory(){
+        $subcategory = SubCategory::all();
+        return response()->json([
+         'success' => true,
+         'data' => $subcategory,
+     ], 200);
+    }
+
+    public function childcategory(){
+        $childcategory = ChildCategory::all();
+        return response()->json([
+         'success' => true,
+         'data' => $childcategory,
+     ], 200);
+    }
+
+    public function product(){
+        $product = Product::all();
+        return response()->json([
+         'success' => true,
+         'data' => $product,
+     ], 200);
+    }
+
+    public function blog(){
+        $blog = Blog::all();
+        return response()->json([
+         'success' => true,
+         'data' => $blog,
+     ], 200);
+    }
+
 }
