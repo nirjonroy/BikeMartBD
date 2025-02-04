@@ -1,0 +1,6 @@
+---
+deployment:
+  tasks:
+    - export DEPLOYPATH=/home/bdy9z1ll9ump/bikemart.blacktechcorp.com/
+    - /bin/cp * $DEPLOYPATH
+    
