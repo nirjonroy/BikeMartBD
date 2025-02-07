@@ -141,6 +141,29 @@
           </ul>
         </li>
 
+        <!-- reports -->
+
+        <li class="nav-item has-treeview {{ request()->routeIs('inventory.*') ? 'menu-open' : '' }}">
+          <a href="#" class="nav-link {{ request()->routeIs('inventory.*') ? 'active' : '' }}">
+            <i class="nav-icon fas fa-file"></i>
+            <p>Reports <i class="fas fa-angle-left right"></i> </p>
+          </a>
+          <ul class="nav nav-treeview">
+            <li class="nav-item">
+              <a href="{{ route('inventory') }}" class="nav-link {{ request()->routeIs('inventory') ? 'active' : '' }}">
+                <i class="far fa-circle nav-icon"></i>
+                <p> Report</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="{{ route('inventory') }}" class="nav-link {{ request()->routeIs('inventory') ? 'active' : '' }}">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Inventory</p>
+              </a>
+            </li>
+          </ul>
+        </li>
+
         <!-- Logout -->
         <li>
           <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">

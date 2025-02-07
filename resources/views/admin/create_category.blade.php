@@ -10,7 +10,7 @@
             </div>
             <!-- /.card-header -->
             <!-- form start -->
-            <form role="form" action="{{ route('category.store') }}" method="POST" enctype="multipart/form-data">
+<form role="form" action="{{ route('category.store') }}" method="POST" enctype="multipart/form-data">
     @csrf
     <div class="card-body">
 

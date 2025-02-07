@@ -4,6 +4,7 @@ use App\Http\Controllers\BlogController;
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ChildCategoryController;
+use App\Http\Controllers\InventoryController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SubCategoryController;
@@ -48,7 +49,10 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('subcategory-by-category/{id}', [ChildCategoryController::class, 'getSubcategoryByCategory'])->name('subcategory-by-category');
     Route::get('childcategory-by-subcategory/{id}', [ChildCategoryController::class,'getChildcategoryBySubCategory'])->name('childcategory-by-subcategory');
     
-
+    Route::get('inventory', [InventoryController::class, 'index'])->name('inventory');
+    Route::get('stock-history/{id}', [InventoryController::class, 'show_inventory'])->name('stock-history');
+    Route::post('add-stock', [InventoryController::class, 'add_stock'])->name('add-stock');
+    Route::delete('delete-stock/{id}', [InventoryController::class, 'delete_stock'])->name('delete-stock');
 });
 
 

@@ -559,6 +559,7 @@ class ComposerStaticInitfe33f98a750b8c5a51b30c78bd3fab21
         'App\\Models\\Category' => __DIR__ . '/../..' . '/app/Models/Category.php',
         'App\\Models\\ChildCategory' => __DIR__ . '/../..' . '/app/Models/ChildCategory.php',
         'App\\Models\\Galary' => __DIR__ . '/../..' . '/app/Models/Galary.php',
+        'App\\Models\\Inventory' => __DIR__ . '/../..' . '/app/Models/Inventory.php',
         'App\\Models\\Product' => __DIR__ . '/../..' . '/app/Models/Product.php',
         'App\\Models\\Slider' => __DIR__ . '/../..' . '/app/Models/Slider.php',
         'App\\Models\\SubCategory' => __DIR__ . '/../..' . '/app/Models/SubCategory.php',

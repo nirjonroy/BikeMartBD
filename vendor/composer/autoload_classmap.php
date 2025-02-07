@@ -40,6 +40,7 @@ return array(
     'App\\Models\\Category' => $baseDir . '/app/Models/Category.php',
     'App\\Models\\ChildCategory' => $baseDir . '/app/Models/ChildCategory.php',
     'App\\Models\\Galary' => $baseDir . '/app/Models/Galary.php',
+    'App\\Models\\Inventory' => $baseDir . '/app/Models/Inventory.php',
     'App\\Models\\Product' => $baseDir . '/app/Models/Product.php',
     'App\\Models\\Slider' => $baseDir . '/app/Models/Slider.php',
     'App\\Models\\SubCategory' => $baseDir . '/app/Models/SubCategory.php',
