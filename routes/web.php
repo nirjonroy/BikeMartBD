@@ -53,6 +53,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('stock-history/{id}', [InventoryController::class, 'show_inventory'])->name('stock-history');
     Route::post('add-stock', [InventoryController::class, 'add_stock'])->name('add-stock');
     Route::delete('delete-stock/{id}', [InventoryController::class, 'delete_stock'])->name('delete-stock');
+    
 });
 
 

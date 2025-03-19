@@ -21,5 +21,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/childcategory', [SiteInformationController::class, 'childcategory']);
     Route::get('/product', [SiteInformationController::class, 'product']);
     Route::get('/blog', [SiteInformationController::class, 'blog']);
+    Route::get('/category-wise-products/{slug?}', [SiteInformationController::class, 'shop']);
+    
 
 });

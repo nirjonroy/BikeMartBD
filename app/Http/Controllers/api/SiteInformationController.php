@@ -165,4 +165,54 @@ class SiteInformationController extends Controller
      ], 200);
     }
 
+    public function shop(Request $request, $slug = null)
+{
+    $data = null;
+
+    if (!empty($slug)) {
+        $data = Category::with('products')->whereSlug($slug)->first();
+
+        if (!$data) {
+            $data = SubCategory::with('products')->whereSlug($slug)->first();
+        }
+
+        if (!$data) {
+            $data = ChildCategory::with('products')->whereSlug($slug)->first();
+        }
+    }
+
+    if ($data instanceof Category || $data instanceof SubCategory || $data instanceof ChildCategory) {
+        $products = $data->products;
+    } else {
+        $products = Product::with(['category', 'subCategory', 'childCategory'])->take(30)->get();
+    }
+
+    // Apply price range filter
+    $minPrice = $products->min('price');
+    $maxPrice = $products->max('price');
+
+    $minPriceFilter = $request->input('min_price', $minPrice);
+    $maxPriceFilter = $request->input('max_price', $maxPrice);
+
+    $filteredProducts = $products->whereBetween('price', [$minPriceFilter, $maxPriceFilter]);
+
+    // Apply availability filter
+    $inStock = $request->input('in_stock');
+    $outOfStock = $request->input('out_of_stock');
+
+    if ($request->input('in_stock')) {
+        $filteredProducts = $filteredProducts->where('qty', '>', 0);
+    }
+
+    if ($request->input('out_of_stock')) {
+        $filteredProducts = $filteredProducts->where('sold_qty', '==', 'qty');
+    }
+    // dd($data);
+    // return view('frontend.shop.index', compact('filteredProducts', 'minPrice', 'maxPrice', 'data'));
+    return response()->json([
+        'success' => true,
+        'data' => $filteredProducts,
+    ], 200);
+}
+
 }

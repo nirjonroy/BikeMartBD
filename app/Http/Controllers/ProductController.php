@@ -16,7 +16,8 @@ class ProductController extends Controller
 {
     public function index()
     {
-        $products = Product::with('category', 'subCategory', 'childCategory', 'brand')->get();
+        $products = Product::with('category', 'subCategory', 'childCategory', 'brand', 'gallery')->get();
+        // dd($products);
         return view('admin.product', compact('products'));
     }
 
@@ -37,50 +38,28 @@ class ProductController extends Controller
             'subCategoryId' => 'required|integer',
             'childCategoryId' => 'required|integer',
             'image' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
-            // Add other validations as needed
+            'galary_id.*' => 'nullable|image|mimes:jpg,jpeg,png|max:2048', // Ensure multiple images are validated
         ]);
-
+    
         $product = new Product();
-
+    
         // Handle Image Upload
         if ($request->hasFile('image')) {
             $extension = $request->image->getClientOriginalExtension();
             $imageName = 'image-' . now()->format('Y-m-d-h-i-s') . '-' . rand(999, 9999) . '.' . $extension;
             $imagePath = 'uploads/custom-images/products/' . $imageName;
-
+    
             Image::make($request->image)->save(public_path($imagePath));
             $product->image = $imagePath;
         }
-
-        if ($request->hasFile('galary_id')) {
-            $imageData = [];
-            foreach ($request->file('galary_id') as $key => $image) {
-        
-                $extention = $image->getClientOriginalExtension();
-                $image_name = Str::slug($request->name).date('-Y-m-d-h-i-s-').rand(999,9999).'.'.$extention;
-                $image = Image::make($image);
-        
-                $destation_path_another = 'uploads/custom-images/products/'.$image_name;
-                // $image->resize(700,700);
-                $image->save(public_path().'/'.$destation_path_another);
-        
-                $imageData[] = ['image' => $destation_path_another, 'product_id' => $product->id];
-        
-            }
-        
-            if (!empty($imageData)) {
-                // Associate images with the product using the gallery relationship
-                $product->gallery()->createMany($imageData);
-            }
-        }
-
+    
         // Generate a Unique Slug
         $slug = $request->slug ?? Str::slug($request->name);
         $count = Product::where('slug', 'like', $slug . '%')->count();
         if ($count > 0) {
             $slug .= '-' . ($count + 1);
         }
-
+    
         // Store Data
         $product->name = $request->name;
         $product->slug = $slug;
@@ -102,11 +81,32 @@ class ProductController extends Controller
         $product->seo_title = $request->seo_title;
         $product->seo_description = $request->seo_description;
         $product->tags = $request->tags;
-
+    
+        // **First Save Product to Generate ID**
         $product->save();
-
+    
+        // **Now Save Gallery Images**
+        if ($request->hasFile('galary_id')) {
+            $imageData = [];
+            foreach ($request->file('galary_id') as $image) {
+                $extension = $image->getClientOriginalExtension();
+                $imageName = Str::slug($request->name) . date('-Y-m-d-h-i-s-') . rand(999, 9999) . '.' . $extension;
+                
+                $imagePath = 'uploads/custom-images/products/' . $imageName;
+                Image::make($image)->save(public_path($imagePath));
+    
+                // **Now product_id exists, so we can assign it**
+                $imageData[] = ['image' => $imagePath, 'product_id' => $product->id];
+            }
+    
+            if (!empty($imageData)) {
+                $product->gallery()->createMany($imageData); // Now product_id is correctly associated
+            }
+        }
+    
         return redirect()->back()->with('success', 'Product created successfully');
     }
+    
 
     public function edit($id)
     {
