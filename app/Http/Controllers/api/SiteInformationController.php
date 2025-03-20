@@ -165,6 +165,27 @@ class SiteInformationController extends Controller
      ], 200);
     }
 
+    public function show_poducts($slug)
+{
+
+   
+
+    $product = Product::with( 'category', 'subCategory', 'childCategory', 'brand', 'gallery')
+
+                        ->where('slug', $slug)
+                        ->first();
+                        // dd($id);
+    
+    $relatedProducts = Product::with( 'category', 'subCategory', 'childCategory', 'brand')
+                          ->where('categoryId', $product->categoryId) // Assuming category_id is the column name
+                          ->where('id', '<>', $product->id) // Exclude the current product
+                          ->limit(10) // Limit to 5 results
+                          ->get();
+
+   
+    return view('frontend.product.show', compact('product', 'relatedProducts'));
+}
+
     public function shop(Request $request, $slug = null)
 {
     $data = null;
@@ -214,5 +235,7 @@ class SiteInformationController extends Controller
         'data' => $filteredProducts,
     ], 200);
 }
+
+
 
 }
